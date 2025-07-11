@@ -114,6 +114,13 @@ namespace AvaloniaTest1.Classes
                 query = query.Where(p => p.AssignedEmployeeID == employeeId.Value);
             }
             return query.Count();
-        }   
+        }
+
+        public static int UsersCount(Database db)
+        {
+            var query = db.Users;
+           
+            return query.Count();
+        }
     }
 }

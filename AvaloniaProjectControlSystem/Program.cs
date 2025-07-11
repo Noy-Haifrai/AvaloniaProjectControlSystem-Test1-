@@ -29,6 +29,10 @@ namespace AvaloniaTest1
                 // Цикл авторизации
                 while (true)
                 {
+                    if (LINQs.UsersCount(db) == 0)
+                    {
+                        CreateRoot();
+                    }
                     Console.Clear();
                     Console.WriteLine("Введите логин, а затем пароль (или Esc для выхода)");
 
@@ -47,7 +51,7 @@ namespace AvaloniaTest1
                     break;
                 }
                 Console.Clear();
-                Console.WriteLine($"\nДобро пожаловать, {userFirstName} {userLastName}!");
+                Console.WriteLine($"Добро пожаловать, {userFirstName} {userLastName}!");
                 Console.WriteLine($"Ваша роль: {userRole}");
 
                 // Основное меню
@@ -464,6 +468,37 @@ namespace AvaloniaTest1
             {
                 Console.WriteLine($"Ошибка: {ex.Message}");
             }
-        } 
+        }
+        //Создание root пользователя.
+        private static void CreateRoot()
+        {
+            try
+            {
+                Console.WriteLine("\nВ системе нет ни одного пользователе. Создайте аккаунт главного администратора:");
+
+                Console.Write("Логин: ");
+                string login = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(login))
+                {
+                    Console.WriteLine("Логин не может быть пустым!");
+                    return;
+                }
+
+                Console.Write("Пароль: ");
+                string password = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(password))
+                {
+                    Console.WriteLine("Пароль не может быть пустым!");
+                    return;
+                }
+
+                // Пробуем создать пользователя
+                operations.createUser(login, password, "-", "-", "-",0);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка: {ex.Message}");
+            }
+        }
     }
 }

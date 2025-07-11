@@ -47,8 +47,8 @@ namespace AvaloniaTest1.Classes
             SaveData(_db);
             Console.WriteLine("Сотрудник успешно зарегистрирован!");
 
-            // Логирование (если logger доступен)
-            logger?.Log($"Создан новый пользователь: {firstName} {patronimic} (ID: {newUser.Id}, Роль: {(role == 1 ? "Управляющий" : "Сотрудник")})");
+            // Логирование 
+            logger?.Log($"Создан новый пользователь: {firstName} {patronimic} (ID: {newUser.Id}, Роль: {(role == 1 ? "Управляющий" : "Сотрудник" )})");
         }
         //Удаление пользователя
         public void deleteUserByID(int id)
